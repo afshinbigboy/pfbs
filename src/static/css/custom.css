@@ -1,0 +1,9 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+  background: linear-gradient(to bottom right, rgb(220, 255, 255), rgb(255, 220, 255));
+  min-height: 100%;
+}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+
+
+
+{% block head_title %}
+{{ p.title }} | Feedback
+{% endblock %}
+
+
+{% block content %}
+
+    <p>
+        Feedback:
+    </p>
+
+    <h2>{{p.title}}</h2>
+    <h4 class="text-right">{{p.oral_date}}</h4>
+    
+
+    <form method="post" dir="auto">
+        {% csrf_token %}
+        {% for presentor in p.presentor.all %}
+            <h4>{{presentor.get_full_name}}</h4>
+            <hr class="my-3">
+            <ol dir="auto" class="mb-5">
+            {% for q in qs %}
+                <li>
+                    <p dir="auto" class="mb-2 mt-5">{{q.description}}</p>
+
+                    <fieldset class="form-group">
+                        <div class="row">
+                        <div class="col-sm-1"></div>
+                            {% for i in scores %}
+                                <div class="col-sm-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input mx-4" type="radio" name="q_{{presentor.id}}_{{q.rank}}" id="scoreRadios_{{presentor.id}}_{{i}}" value="{{i}}" required="">
+                                        <label class="form-check-label mx-1" for="scoreRadios_{{presentor.id}}_{{i}}">{{i}}</label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </fieldset>
+
+                    {% comment %} <input class="form-control" type="number" min=1 max=10 placeholder="5" name="q_{{q.id}}"/><br> {% endcomment %}
+                    <div style="min-height:1px; background:linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.3), rgba(0,0,0,0))">
+                </li>
+            {% endfor %}
+            <ol>
+
+        {% endfor %}
+
+        <div class="text-center">
+            <button class="w-50 my-5 btn btn-primary" type="submit">Submit</button>
+        </div>
+    <form>
+
+
+{% endblock %}

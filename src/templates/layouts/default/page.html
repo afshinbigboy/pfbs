@@ -1,0 +1,37 @@
+
+{% extends 'layouts/default/base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% get_current_language as language_code %}
+
+
+{% block main %}
+
+
+<div class="container-fluid mt-3" style="min-height: 100%; margin-bottom: -150px; padding-top: 58px">
+
+    
+    <div class="row" style="bottom: 0px !important;">
+        <div class="col-sm-12">
+            <div class="main text-primary-v80">
+                <div class="container-fluid">
+                    <div class="col-sm-12 col">
+
+                    </div>
+                    {% bootstrap_messages %}
+
+                    {% block content %}
+                        No content.
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="min-height: 150px;"></div>
+</div>
+
+{% endblock %}

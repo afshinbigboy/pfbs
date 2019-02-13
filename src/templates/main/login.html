@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+
+
+
+{% block main %}
+    <h1 class="mt-5 text-center">Login</h1>
+
+    <div class="container-fluid h-100">
+        {% comment %} {% bootstrap_messages %} {% endcomment %}
+
+        <div class="row justify-content-center align-items-center h-100 text-primary-v60">
+            <div class="col col-sm-6 col-md-6 col-lg-5 col-xl-4 mt-5">
+                {% block content %}
+                    No content.
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="small text-center text-muted my-5">
+        If you have not an account please <a href="{% url 'accounts:sign_up' %}" class="">sign-up</a>.
+    </div>
+{% endblock %}

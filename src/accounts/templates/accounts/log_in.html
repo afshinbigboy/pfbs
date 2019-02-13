@@ -1,0 +1,22 @@
+{% extends 'main/login.html' %}
+{% load bootstrap4 %}
+
+
+
+{% block head_title %}
+Login
+{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+
+        {% csrf_token %}
+        {% bootstrap_form form layout='inline' %}
+
+        <div class="text-center ">
+            <button class="btn btn-info w-100">Log in</button>
+        </div>
+
+    </form>
+{% endblock %}

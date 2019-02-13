@@ -1,0 +1,157 @@
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% get_current_language as language_code %}
+
+
+<!DOCTYPE html>
+<html lang="{{ language_code }}" dir="{% if language_code == 'fa' %}rtl{% else %}ltr{% endif %}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="FanAsa project.">
+        <meta name="author" content="Afshin">
+        <link rel="icon" href="{% static 'favicon.ico' %}">
+        <title>FanAsa</title>
+        {% if language_code == 'fa' %}
+            <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+        {% else %}
+            <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        {% endif %}
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+        {% comment %} <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css"> {% endcomment %}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    
+        {% if language_code == 'fa' %}
+            <style>
+                body{
+                    font-family: "BYekan";
+                    {% comment %} font-size: 13px; {% endcomment %}
+                }    
+            </style>
+        {% endif %}
+    
+    </head>
+
+{% block body_start %}
+<body background="" style="background-size:cover">
+{% endblock %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary-v40 fixed-top">
+    <a class="navbar-brand" href="/">{% trans 'Home' %}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'traffic:traffic_list' %}">{% trans 'Traffic list' %}</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:log_in' %}">{% trans 'Log in' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:sign_up' %}">{% trans 'Create an account' %}</a>
+                </li>
+            {% endif %}
+        </ul>
+
+        <ul class="navbar-nav">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User Setting
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
+                        <a class="dropdown-item" href="{% url 'accounts:change_profile' %}">{% trans 'Change profile' %}</a>
+                        <a class="dropdown-item" href="{% url 'accounts:change_email' %}">{% trans 'Change email' %}</a>
+                        <hr>
+                        <a class="dropdown-item" href="{% url 'change_language' %}">{% trans 'Change language' %}</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:log_out' %}">{% trans 'Log out' %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% block main %}
+<div class="container-fluid mt-3" style="min-height: 100%; margin-bottom: -150px; padding-top: 58px">    
+    <div class="row" style="bottom: 0px !important;">
+        <div class="col-sm-12">
+            <div class="main text-primary-v60">
+                <div class="container-fluid">
+                    {% bootstrap_messages %}
+
+                    {% block content %}
+                        No content.
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="min-height: 150px;"></div>
+</div>
+{% endblock %}
+
+
+<!-- -------------------------------------------------------- footer ------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 bg-primary-v25" style="">
+            <div class="row mx-0 px-0">
+                <div class="col-8">
+                </div>
+                <div class="col-12 col-sm-4 text-primary-v85 d-flex align-items-center justify-content-center" style="min-height: 60px">
+                    <small>
+                        Follow us <br>
+                        <a class="footer-join-us-fa" target="_blank">
+                            <i class="fa fa-2x fa-twitter-square"></i>
+                        </a>
+                        <a class="footer-join-us-fa" href="https://fb.me/fanasa" target="_blank">
+                            <i class="fa fa-2x fa-facebook-square"></i>
+                        </a>
+                        <a class="footer-join-us-fa" target="_blank">
+                            <i class="fa fa-2x fa-google-plus-square"></i>
+                        </a>
+                        <a class="footer-join-us-fa" target="_blank">
+                            <i class="fa fa-2x fa-whatsapp"></i>
+                        </a>
+                        <a class="footer-join-us-fa" href="https://t.me/fanasa" target="_blank">
+                            <i class="fa fa-2x fa-telegram"></i>
+                        </a>
+                        <a class="footer-join-us-fa" href="https://instagram.com/fanasa" target="_blank">
+                            <i class="fa fa-2x fa-instagram"></i>
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-center bg-primary-v10" style="min-height: 90px">
+            <div  class="text-primary-v40">
+                <small>Copyright &copy; 2018, FanAsa. All right reserved.</small>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======================================================= end footer ==================================================== -->
+   
+
+
+<script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+
+{% block script %}
+{% endblock %}
+
+</body>
+</html>
